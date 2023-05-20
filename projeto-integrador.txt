@@ -1,0 +1,8 @@
+CREATE DATABASE projeto-integrador
+CREATE TABLE departamento(
+	id_departamento SERIAL PRIMARY KEY, 
+	nome_departamento VARCHAR(40), 
+	descricao VARCHAR(100)
+);
+INSERT INTO departamento(nome_departamento, descricao) 
+	VALUES ('Gerência', 'Controle e planejamento de operações da empresa.');
