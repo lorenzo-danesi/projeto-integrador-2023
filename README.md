@@ -1,12 +1,12 @@
 # Entrega 4
 
-Implementação de pelo menos um CRUD do sistema/site/aplicativo/etc.
+### Implementação de pelo menos um CRUD do sistema/site/aplicativo/etc.
 
-Semana para apresentações presenciais - 22/05 a 26/05
+### Semana para apresentações presenciais - 22/05 a 26/05
 
-Tempo de apresentação para cada estudante: entre 10 e 15 minutos
+### Tempo de apresentação para cada estudante: entre 10 e 15 minutos
 
-## Roteiro:
+### Roteiro:
 
 1 - apresentar a interface funcionando (inserindo, visualizando, editando e excluindo os dados de um cadastro);
 
