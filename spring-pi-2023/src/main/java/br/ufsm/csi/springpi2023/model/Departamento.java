@@ -25,6 +25,11 @@ public class Departamento {
         this.descricao = descricao;
         this.qtd_funcionarios = qtd_funcionarios;
     }
+    //contrutor que retorna dados para Funcionario
+    public Departamento(int id_departamento, String nome_departamento) {
+        this.id_departamento = id_departamento;
+        this.nome_departamento = nome_departamento;
+    }
 
     public int getId_departamento() {
         return id_departamento;

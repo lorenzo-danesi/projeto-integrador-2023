@@ -36,7 +36,8 @@ public class DepartamentoDao {
         ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
 
         try (Connection connection = new ConectaBD().getConexao()){
-            this.sql = " SELECT * FROM departamento";
+            this.sql = "SELECT d.id_departamento, d.nome_departamento, d.descricao, COUNT(f.id_funcionario) AS TOTAL FROM departamento d " +
+                    "LEFT JOIN funcionario f ON d.id_departamento = f.id_departamento GROUP BY d.id_departamento";
             this.preparedStatement = connection.prepareStatement(this.sql);
             this.resultSet = this.preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -44,6 +45,7 @@ public class DepartamentoDao {
                 departamento.setId_departamento(this.resultSet.getInt("id_departamento"));
                 departamento.setNome_departamento(this.resultSet.getString("nome_departamento"));
                 departamento.setDescricao(this.resultSet.getString("descricao"));
+                departamento.setQtd_funcionarios(this.resultSet.getInt("total"));
                 departamentos.add(departamento);
             }
         }catch (SQLException e){
@@ -99,13 +101,13 @@ public class DepartamentoDao {
         ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
 
         try (Connection connection = new ConectaBD().getConexao()){
-            this.sql = "SELECT d.nome_departamento, COUNT (f.id_funcionario) as TOTAL" +
+            this.sql = "SELECT d.id_departamento, COUNT (f.id_funcionario) as TOTAL " +
                     "FROM departamento d, funcionario f WHERE f.id_departamento = d.id_departamento GROUP BY d.id_departamento";
             this.preparedStatement = connection.prepareStatement(this.sql);
             this.resultSet = this.preparedStatement.executeQuery();
             while (resultSet.next()){
                 Departamento departamento = new Departamento();
-                departamento.setNome_departamento(this.resultSet.getString("nome_departamento"));
+                departamento.setId_departamento(this.resultSet.getInt("id_departamento"));
                 departamento.setQtd_funcionarios(this.resultSet.getInt("total"));
                 departamentos.add(departamento);
             }

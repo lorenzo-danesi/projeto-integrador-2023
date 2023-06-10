@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/api/departamentos")
+@RequestMapping("/departamentos")
 public class DepartamentoController {
 
     @GetMapping("/listar")

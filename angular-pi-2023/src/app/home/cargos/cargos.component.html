@@ -1,0 +1,104 @@
+<br>
+<!-- HTML PARA O CADASTRO DE Cargos -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-100 col-md-100 col-lg-10 mx-auto">
+      <div class="card border-0 shadow rounded-9 my-9">
+        <div class="card-body p-10 p-sm-9">
+          <h2 class="card-title text-center mb-5 fw-light fs-5">
+            Cadastrar cargo
+          </h2>
+          <form class="row g-3">
+            <div class="form-group col-md-6">
+              <label class="form-label" for="nome">Nome</label>
+              <input [(ngModel)]="cargo.nome" name="nome" type="text" class="form-control" id="nome" placeholder="Digite o nome">
+            </div>
+            <div class="form-group col-md-6">
+              <label class="form-label" for="salario">Salário</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">R$</span>
+                <input [(ngModel)]="cargo.salario" name="salario" type="number" class="form-control" id="salario">
+                <span class="input-group-text">00.00</span>
+              </div>
+              <!--<div id="descricaoHelp" class="form-text">Ex. 999.99</div>-->
+            </div>
+
+            <div class="form-group col-md-4">
+              <label class="form-label" for="vale_alimentacao">Vale-alimentação</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">R$</span>
+                <input [(ngModel)]="cargo.vale_alimentacao" name="vale_alimentacao" type="number" class="form-control" id="vale_alimentacao">
+                <span class="input-group-text">00.00</span>
+              </div>
+              <!--<div id="descricaoHelp" class="form-text">Ex. 999.99</div>-->
+            </div>
+            <div class="form-group col-md-4">
+              <label class="form-label" for="vale_transporte">Vale-transporte</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">R$</span>
+                <input [(ngModel)]="cargo.vale_transporte" name="vale_transporte" type="number" class="form-control" id="vale_transporte">
+                <span class="input-group-text">00.00</span>
+              </div>
+              <!--<div id="descricaoHelp" class="form-text">Ex. 999.99</div>-->
+            </div>
+            <div class="form-group col-md-4">
+              <label class="form-label" for="carga_horaria">CH (carga horária)</label>
+              <div class="input-group mb-3">
+                <input [(ngModel)]="cargo.carga_horaria" name="carga_horaria" type="number" class="form-control" id="carga_horaria">
+              </div>
+            </div>
+
+            <div [ngSwitch]="opcao" >
+              <button *ngSwitchCase="'cadastrar'" (click)="cadastrar()" class="btn btn-primary">Cadastrar</button>
+              <button *ngSwitchCase="'editar'" (click)="editar()" class="btn btn-primary me-2">Salvar</button>
+              <button *ngSwitchCase="'editar'" (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
+            </div>
+          </form>
+          <br>
+          <div *ngIf="cadastrado" class="alert alert-success" role="alert">
+            <h6>Cargo cadastrado com sucesso!</h6>
+          </div>
+          <div *ngIf="editado" class="alert alert-warning" role="alert">
+            <h6>Cargo editado com sucesso!</h6>
+          </div>
+          <div *ngIf="deletado" class="alert alert-danger" role="alert">
+            <h6>Cargo deletado com sucesso!</h6>
+          </div>
+
+        </div>
+
+        <table class="table">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">NOME</th>
+            <th scope="col">SALÁRIO (R$)</th>
+            <th scope="col">V ALIMENTAÇÃO (R$)</th>
+            <th scope="col">V TRANSPORTE (R$)</th>
+            <th scope="col">CH</th>
+            <th scope="col">AÇÕES</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let car of cargos; index as i">
+            <th scope="row">{{i}}</th>
+            <th>{{car.id}}</th>
+            <th>{{car.nome}}</th>
+            <th>{{car.salario}}</th>
+            <th>{{car.vale_alimentacao}}</th>
+            <th>{{car.vale_transporte}}</th>
+            <th>{{car.carga_horaria}}</th>
+            <td>
+              <button (click)="buscar(car.id)" type="button" class="btn btn-warning me-2">Editar</button>
+              <button (click)="deletar(car.id)" type="button" class="btn btn-danger">Deletar</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

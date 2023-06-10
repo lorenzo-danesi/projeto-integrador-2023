@@ -1,0 +1,27 @@
+import { Component, OnInit } from '@angular/core';
+import { Funcionario } from '../home/funcionarios/model/funcionario';
+import { Router } from '@angular/router';
+import { LoginService } from './service/login.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit{
+
+  constructor(private router: Router, private service: LoginService) { }
+
+  usuario: Funcionario = new Funcionario();
+
+  ngOnInit(): void {
+  }
+
+  logar(): void{
+    this.service.login(this.usuario).subscribe( u =>{
+      console.log('usuario = '+u.token)
+      this.service.setarUsuarioLogado(u);
+      this.router.navigate(['/home']);
+    })
+  }
+}

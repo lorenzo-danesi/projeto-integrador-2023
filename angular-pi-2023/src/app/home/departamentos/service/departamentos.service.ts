@@ -8,7 +8,7 @@ import { Observable} from "rxjs";
 })
 export class DepartamentosService {
 
-  private readonly API = 'http://localhost:8080/api/departamentos/';
+  private readonly API = 'http://localhost:8080/departamentos/';
   /*
   * é necessário injetar o HttpClientModule no módulo ...
   * */

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Departamento } from './model/departamento';
-import { DepartamentosService } from './service/departamentos.service';
+import { Cargo } from './model/cargos.';
+import { CargosService } from './service/cargos.service';
 
 @Component({
-  selector: 'app-departamentos',
-  templateUrl: './departamentos.component.html',
-  styleUrls: ['./departamentos.component.css']
+  selector: 'app-cargos',
+  templateUrl: './cargos.component.html',
+  styleUrls: ['./cargos.component.css']
 })
-export class DepartamentosComponent implements OnInit {
+export class CargosComponent implements OnInit{
 
-  departamento: Departamento = new Departamento();
-  departamentos: Departamento[] = [];
+  cargo: Cargo = new Cargo();
+  cargos: Cargo[] = [];
 
   cadastrado: boolean = false;
   editado: boolean = false;
@@ -18,7 +18,7 @@ export class DepartamentosComponent implements OnInit {
 
   opcao: string = 'cadastrar';
 
-  constructor(private service: DepartamentosService) {
+  constructor(private service: CargosService) {
   }
 
   ngOnInit(): void {
@@ -27,43 +27,43 @@ export class DepartamentosComponent implements OnInit {
 
   private atualizar(): void {
     this.service.listar().subscribe((dados) => {
-      this.departamentos = dados;
+      this.cargos = dados;
     });
   }
 
   cadastrar() {
-    console.log('botão clicado' + this.departamento)
+    console.log('botão clicado' + this.cargo)
     if (this.cadastrado) {
       this.cadastrado = false;
     } else {
       this.cadastrado = true;
     }
 
-    this.service.criar(this.departamento)
+    this.service.criar(this.cargo)
       .subscribe(() => {
         this.atualizar();
       })
-    this.departamento = new Departamento();
+    this.cargo = new Cargo();
   }
 
   buscar(id?: number){
-    this.service.buscar(id).subscribe((dado: Departamento)=>{
-      this.departamento = dado;
+    this.service.buscar(id).subscribe((dado: Cargo)=>{
+      this.cargo = dado;
       this.opcao = 'editar';
     })
   }
 
   editar() {
-    console.log('botão clicado' + this.departamento)
+    console.log('botão clicado' + this.cargo)
     if (this.editado) {
       this.editado = false;
     } else {
       this.editado = true;
     }
 
-    this.service.atualizar(this.departamento).
+    this.service.atualizar(this.cargo).
     subscribe(() => {
-      this.departamento = new Departamento();
+      this.cargo = new Cargo();
       this.atualizar();
       this.opcao = 'cadastrar'
     })
@@ -72,7 +72,7 @@ export class DepartamentosComponent implements OnInit {
   }
 
   deletar(id?: number) {
-    console.log('botão clicado' + this.departamento)
+    console.log('botão clicado' + this.cargo)
     if (this.deletado) {
       this.deletado = false;
     } else {
@@ -88,7 +88,7 @@ export class DepartamentosComponent implements OnInit {
   }
 
   cancelar() {
-    this.departamento = new Departamento;
+    this.cargo = new Cargo;
     this.opcao = 'cadastrar';
   }
 }

@@ -1,8 +1,17 @@
 CREATE DATABASE projeto-integrador
-CREATE TABLE departamento(
-	id_departamento SERIAL PRIMARY KEY, 
-	nome_departamento VARCHAR(40), 
-	descricao VARCHAR(100)
-);
+CREATE TABLE departamento(id_departamento SERIAL PRIMARY KEY, nome_departamento VARCHAR(40), descricao VARCHAR(100));
 INSERT INTO departamento(nome_departamento, descricao) 
 	VALUES ('Gerência', 'Controle e planejamento de operações da empresa.');
+
+CREATE TABLE cargo(id_cargo SERIAL PRIMARY KEY, nome_cargo VARCHAR(100), salario NUMERIC, vale_alimentacao NUMERIC, vale_transporte NUMERIC, carga_horaria INT);
+INSERT INTO cargo(nome_cargo, salario, vale_alimentacao, vale_transporte, carga_horaria) 
+	VALUES ('G. Administrativo', 4163.05, 534.41, 213.80, 44);
+
+CREATE TABLE funcionario(id_funcionario SERIAL PRIMARY KEY, id_cargo INT, id_departamento INT,
+						 permissao VARCHAR(12), nome_funcionario VARCHAR(50), cpf VARCHAR(15), email VARCHAR (60), senha VARCHAR(8),
+						 telefone VARCHAR(15), data_cadastro DATE, status VARCHAR(50),
+							FOREIGN KEY (id_departamento) REFERENCES departamento(id_departamento) ON DELETE SET NULL
+						 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo) ON DELETE SET NULL);
+							
+INSERT INTO funcionario(id_cargo, id_departamento, permissao, nome_funcionario, cpf, email, senha, telefone, data_cadastro, status)
+	VALUES(1, 1, 'Admin', 'Bob', '999.999.999-99', 'bob@domain.com', '1234', '(99)99999-9999', CURRENT_DATE, 'Ativo');

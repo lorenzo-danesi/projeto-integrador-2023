@@ -22,7 +22,8 @@
 
             <div [ngSwitch]="opcao" >
               <button *ngSwitchCase="'cadastrar'" (click)="cadastrar()" class="btn btn-primary">Cadastrar</button>
-              <button *ngSwitchCase="'editar'" (click)="editar()" class="btn btn-primary">Salvar</button>
+              <button *ngSwitchCase="'editar'" (click)="editar()" class="btn btn-primary me-2">Salvar</button>
+              <button *ngSwitchCase="'editar'" (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
             </div>
 
           </form >
@@ -59,7 +60,7 @@
             <th>{{dep.descricao}}</th>
             <th>{{dep.qtd_funcionarios}}</th>
             <td>
-              <button (click)="buscar(dep.id)" type="button" class="btn btn-warning">Editar</button>
+              <button (click)="buscar(dep.id)" type="button" class="btn btn-warning me-2">Editar</button>
               <button (click)="deletar(dep.id)" type="button" class="btn btn-danger">Deletar</button>
             </td>
           </tr>
