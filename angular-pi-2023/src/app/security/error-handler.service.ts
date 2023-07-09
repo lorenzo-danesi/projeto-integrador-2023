@@ -24,7 +24,7 @@ export class ErrorHandlerService extends ErrorHandler {
           alert('Usuário e/ou senha incorretos')
           break;
         case 403:
-          alert('Problemas ao processar a ação') //não acessa porque não possui o token
+          alert('Acesso negado') //não acessa porque não possui permissão (ou token)
           break;
         case 500:
           alert('API com problemas')

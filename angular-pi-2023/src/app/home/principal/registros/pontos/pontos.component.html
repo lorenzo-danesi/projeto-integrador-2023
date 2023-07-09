@@ -1,0 +1,47 @@
+<br>
+<!-- HTML PARA Tabela de ponto -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-100 col-md-100 col-lg-10 mx-auto">
+      <div class="card border-0 shadow rounded-9 my-9">
+        <div class="card-body p-10 p-sm-9">
+          <h2 class="card-title text-center mb-5 fw-light fs-5">
+            Histórico de pontos
+          </h2>
+          <!-- Tabela de Pontos -->
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Entrada</th>
+                  <th scope="col">Saída</th>
+                  <th scope="col">CH Total</th>
+                </tr>
+              </thead>
+              <!-- Corpo da Tabela -->
+              <tbody class="table-group-divider">
+                <ng-container *ngFor="let pon of pontos; index as i">
+                  <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ pon.data }}</td>
+                    <td>{{ formatarHorario(pon.horario_entrada) }}</td>
+                    <td>{{ formatarHorario(pon.horario_saida) }}</td>
+                  </tr>
+                  <!-- Assim que houver 5 registros (i) gera nova linha com o total da semana -->
+                  <ng-container *ngIf="(i + 1) % 5 === 0">
+                    <tr>
+                      <td colspan="4"></td>
+                      <td>{{ calcularTotalHoras() }} Horas</td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

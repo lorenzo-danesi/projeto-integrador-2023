@@ -11,10 +11,10 @@ export class JwtinterceptorService implements HttpInterceptor {
   constructor(private service: LoginService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const usuario_logado = this.service.usuarioLogado();
-    if(usuario_logado){
-      const req_auth = req.clone({setHeaders:{'Authorization':'Bearer '+usuario_logado.token}});
-      return next.handle(req_auth);
+    const token = localStorage.getItem("token");
+    if(token){
+      req = req.clone({setHeaders:{'Authorization':'Bearer '+ token}});
+      return next.handle(req);
     }else {
       return next.handle(req);
     }

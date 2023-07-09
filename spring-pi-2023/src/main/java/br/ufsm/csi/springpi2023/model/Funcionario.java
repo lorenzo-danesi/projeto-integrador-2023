@@ -22,12 +22,14 @@ public class Funcionario {
 
     public Funcionario() {
     }
+    public Funcionario(int id_funcionario) {
+        this.id_funcionario = id_funcionario;
+    }
     public Funcionario(String email, String senha, String permissao) {
         this.email = email;
         this.senha = senha;
         this.permissao = permissao;
     }
-
     public Funcionario(int id_funcionario, String permissao, String nome_funcionario, String email, String senha, String cpf, String telefone, Date data_cadastro, String status, Departamento departamento, Cargo cargo) {
         this.id_funcionario = id_funcionario;
         this.permissao = permissao;

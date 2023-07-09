@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserDetailServiceCustomizado implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("username: "+username);
+        System.out.println("Username: "+username);
 
         Funcionario usuario = new FuncionarioDao().getLogin(username);
 

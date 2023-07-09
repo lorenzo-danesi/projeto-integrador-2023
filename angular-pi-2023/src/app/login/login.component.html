@@ -7,9 +7,7 @@
           <h5 class="card-title text-center mb-5 fw-light fs-5">
             Fazer login
           </h5>
-
           <form >
-
             <div class="form-group" class="mb-3">
               <label for="login" class="form-label">Login</label>
               <input [(ngModel)]="usuario.email" name="login" type="email" class="form-control" id="login" aria-describedby="email">
@@ -20,10 +18,10 @@
               <input [(ngModel)]="usuario.senha" name="senha" type="password" class="form-control" id="senha" placeholder="Digite sua senha">
             </div>
             <br>
-            <!--<button type="submit" class="btn btn-lg btn-primary btn-block" >Entrar</button>-->
-            <button (click)="logar()" type="submit" class="btn btn-primary">Entrar</button>
+            <div class="text-center">
+              <button (click)="logar()" type="submit" class="btn btn-primary btn-block w-100">Entrar</button>
+            </div>
           </form>
-
         </div>
       </div>
     </div>

@@ -1,0 +1,44 @@
+<br>
+<!-- HTML PARA Espelho de ponto -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-100 col-md-100 col-lg-20 mx-auto">
+      <div class="card border-0 shadow rounded-9 my-9">
+        <div class="card-body p-10 p-sm-9">
+          <h2 class="card-title text-center mb-5 fw-light fs-5">
+            Folha de pagamento
+          </h2>
+          <!-- Tabela de Folha -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Departamento</th>
+                  <th scope="col">Cargo</th>
+                  <th scope="col">Salário base (R$)</th>
+                  <th scope="col">Vale-refeição (R$)</th>
+                  <th scope="col">Vale-transporte (R$)</th>
+                  <th scope="col">Total (R$)</th>
+                </tr>
+              </thead>
+              <!-- Corpo da Tabela -->
+              <tbody class="table-group-divider">
+                  <tr *ngIf="funcionario" >
+                    <td>{{ funcionario.nome }}</td>
+                    <td>{{ funcionario.departamento?.nome }}</td>
+                    <td>{{ funcionario.cargo?.nome }}</td>
+                    <td>{{ funcionario.cargo?.salario }}</td>
+                    <td>{{ funcionario.cargo?.vale_alimentacao }}</td>
+                    <td>{{ funcionario.cargo?.vale_transporte }}</td>
+                    <td>{{ funcionario.cargo?.total_salario }}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

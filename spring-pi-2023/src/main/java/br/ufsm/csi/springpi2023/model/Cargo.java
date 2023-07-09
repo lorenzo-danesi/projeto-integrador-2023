@@ -11,24 +11,32 @@ public class Cargo {
     private float vale_alimentacao;
     private float vale_transporte;
     private int carga_horaria;
+    private float total_salario;
 
     public Cargo() {
     }
 
-    public Cargo(int id_cargo, String nome_cargo, float salario, float vale_alimentacao, float vale_transporte, int carga_horaria) {
+    public Cargo(int id_cargo, String nome_cargo, float salario, float vale_alimentacao, float vale_transporte, int carga_horaria, float total_salario) {
         this.id_cargo = id_cargo;
         this.nome_cargo = nome_cargo;
         this.salario = salario;
         this.vale_alimentacao = vale_alimentacao;
         this.vale_transporte = vale_transporte;
         this.carga_horaria = carga_horaria;
+        this.total_salario = total_salario;
 
     }
-    //contrutor que retorna dados para Funcionário
+    //contrutores que retornam dados para Funcionário
     public Cargo(int id_cargo, String nome_cargo) {
         this.id_cargo = id_cargo;
         this.nome_cargo = nome_cargo;
     }
+    public Cargo(int id_cargo, String nome_cargo, int carga_horaria) {
+        this.id_cargo = id_cargo;
+        this.nome_cargo = nome_cargo;
+        this.carga_horaria = carga_horaria;
+    }
+
 
     public int getId_cargo() {
         return id_cargo;
@@ -65,5 +73,11 @@ public class Cargo {
     }
     public void setCarga_horaria(int carga_horaria) {
         this.carga_horaria = carga_horaria;
+    }
+    public float getTotal_salario() {
+        return total_salario;
+    }
+    public void setTotal_salario(float total_salario) {
+        this.total_salario = total_salario;
     }
 }

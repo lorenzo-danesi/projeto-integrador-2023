@@ -1,0 +1,47 @@
+<br>
+<!-- HTML PARA Tabela de registros de ponto -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-100 col-md-100 col-lg-20 mx-auto">
+      <div class="card border-0 shadow rounded-9 my-9">
+        <div class="card-body p-10 p-sm-9">
+          <h2 class="card-title text-center mb-5 fw-light fs-5">
+            Lista
+          </h2>
+          <!-- Tabela de Funcionários -->
+          <div class="table-responsive">
+            <table class="table table-sm caption-top">
+              <caption>Explore o histórico de pontos dos funcionários: clique para obter informações detalhadas.</caption>
+              <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">NOME</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">CH</th>
+                <th scope="col">DEPARTAMENTO</th>
+                <th scope="col">AÇÃO</th>
+              </tr>
+              </thead>
+              <!-- Corpo da Tabela -->
+              <tbody class="table-group-divider">
+                <tr *ngFor="let fun of funcionarios;" [class]="getClasseStatus(fun.status || '')">
+                <td>{{fun.id}}</td>
+                <td>{{fun.nome}}</td>
+                <td>{{fun.status}}</td>
+                <td>{{fun.cargo?.nome}}</td>
+                <td>{{fun.cargo?.carga_horaria}}</td>
+                <td>{{fun.departamento?.nome}}</td>
+                <td>
+                  <button (click)="selecionarFuncionario(fun.id)" type="button" class="btn btn-success btn-sm">Visualizar</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -60,14 +60,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/cargos/{id_produto}").hasAuthority("Admin")
                 .antMatchers(HttpMethod.DELETE, "/cargos/{id_produto}").hasAuthority("Admin")
                 .antMatchers(HttpMethod.GET, "/funcionarios/listar").hasAuthority("Admin")
+                .antMatchers(HttpMethod.GET, "/funcionarios/{id_funcionario}").hasAnyAuthority("Admin", "Funcionário")
+                .antMatchers(HttpMethod.GET, "/funcionarios/folha/{id_funcionario}").hasAnyAuthority("Admin", "Funcionário")
                 .antMatchers(HttpMethod.POST, "/funcionarios/adicionar").hasAuthority("Admin")
-                .antMatchers(HttpMethod.PUT, "/funcionarios/{id_funcionario}").hasAuthority("Admin")
-                .antMatchers(HttpMethod.DELETE, "/funcionarios/{id_funcionario}").hasAuthority("Admin");
-               // .antMatchers(HttpMethod.GET, "/ponto/listar").hasAuthority("Funcionario");
+                .antMatchers(HttpMethod.PUT, "/funcionarios/{id_funcionario}").hasAnyAuthority("Admin", "Funcionário")
+                .antMatchers(HttpMethod.DELETE, "/funcionarios/{id_funcionario}").hasAuthority("Admin")
+                .antMatchers(HttpMethod.GET, "/pontos/{id_funcionario}").hasAnyAuthority("Admin", "Funcionário")
+                .antMatchers(HttpMethod.GET, "/ultimo/{id_funcionario}/id").hasAnyAuthority("Admin", "Funcionário")
+                .antMatchers(HttpMethod.POST, "/pontos/adicionar").hasAnyAuthority("Admin", "Funcionário")
+                .antMatchers(HttpMethod.PUT, "/pontos/{id_ponto}").hasAnyAuthority("Admin", "Funcionário");
                // .and().formLogin();
 
             http.addFilterBefore(this.filtroAutenticacao(), UsernamePasswordAuthenticationFilter.class);
-
     }
     @Bean
     public CorsFilter corsFilter() {

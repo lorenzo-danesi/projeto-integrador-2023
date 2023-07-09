@@ -1,0 +1,101 @@
+<br>
+<!-- HTML PARA O CADASTRO DE Cargos -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-100 col-md-100 col-lg-10 mx-auto">
+      <div class="card border-0 shadow rounded-9 my-9">
+        <div class="card-body p-10 p-sm-9">
+          <h2 class="card-title text-center mb-5 fw-light fs-5">
+            Cadastrar cargo
+          </h2>
+          <!-- Formulário de cadastro -->
+          <form class="row g-3">
+            <div class="form-group col-md-6">
+              <label class="form-label" for="nome">Nome</label>
+              <input [(ngModel)]="cargo.nome" name="nome" type="text" class="form-control" id="nome" placeholder="Digite o nome">
+            </div>
+            <div class="form-group col-md-6">
+              <label class="form-label" for="salario">Salário</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">R$</span>
+                <input [(ngModel)]="cargo.salario" name="salario" type="number" class="form-control" id="salario">
+                <span class="input-group-text">00.00</span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label class="form-label" for="vale_alimentacao">Vale-alimentação</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">R$</span>
+                <input [(ngModel)]="cargo.vale_alimentacao" name="vale_alimentacao" type="number" class="form-control" id="vale_alimentacao">
+                <span class="input-group-text">00.00</span>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="form-label" for="vale_transporte">Vale-transporte</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">R$</span>
+                <input [(ngModel)]="cargo.vale_transporte" name="vale_transporte" type="number" class="form-control" id="vale_transporte">
+                <span class="input-group-text">00.00</span>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="form-label" for="carga_horaria">CH (carga horária)</label>
+              <div class="input-group mb-3">
+                <input [(ngModel)]="cargo.carga_horaria" name="carga_horaria" type="number" class="form-control" id="carga_horaria">
+              </div>
+            </div>
+
+            <!-- Muda de acordo com a operação (cadastrar/editar) -->
+            <div [ngSwitch]="opcao" >
+              <button *ngSwitchCase="'cadastrar'" (click)="cadastrar()" class="btn btn-primary">Cadastrar</button>
+              <button *ngSwitchCase="'editar'" (click)="editar()" class="btn btn-primary me-2">Salvar</button>
+              <button *ngSwitchCase="'editar'" (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
+            </div>
+          </form>
+          <br>
+          <!--Alert-->
+          <div *ngIf="cadastrado" class="alert alert-success" role="alert">
+            <h6>Cargo cadastrado com sucesso!</h6>
+          </div>
+          <div *ngIf="editado" class="alert alert-warning" role="alert">
+            <h6>Cargo editado com sucesso!</h6>
+          </div>
+          <div *ngIf="deletado" class="alert alert-danger" role="alert">
+            <h6>Cargo deletado com sucesso!</h6>
+          </div>
+
+          <!-- Tabela de Cargos -->
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Salário (R$)</th>
+              <th scope="col">Vale-alimentação (R$)</th>
+              <th scope="col">Vale-transporte (R$)</th>
+              <th scope="col">CH</th>
+              <th scope="col">Acões</th>
+            </tr>
+            </thead>
+            <!-- Corpo da tabela -->
+            <tbody class="table-group-divider">
+            <tr *ngFor="let car of cargos;">
+              <td>{{car.id}}</td>
+              <td>{{car.nome}}</td>
+              <td>{{car.salario}}</td>
+              <td>{{car.vale_alimentacao}}</td>
+              <td>{{car.vale_transporte}}</td>
+              <td>{{car.carga_horaria}}</td>
+              <td>
+                <button (click)="buscar(car.id)" type="button" class="btn btn-warning me-2">Editar</button>
+                <button (click)="deletar(car.id)" type="button" class="btn btn-danger">Deletar</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

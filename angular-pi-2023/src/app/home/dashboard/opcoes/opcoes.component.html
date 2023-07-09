@@ -1,0 +1,45 @@
+<br>
+<br>
+<!-- HTML PARA Tela de opções disponíveis -->
+<div class="container">
+  <!-- Acessar perfil e ponto -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Meus dados</h5>
+          <p class="card-text">Acesse seus dados cadastrais e realize atualizações necessárias ou acesse e vizualize uma versão de sua folha de pagamento no formate de uma tabela.</p>
+          <a href="#" class="card-link me-2" routerLink="/home/dashboard/perfil">Meus dados</a>
+          <a href="#" class="card-link me-2" routerLink="/home/dashboard/espelho" >Ver Espelho de Ponto</a>
+          <a href="#" class="card-link" routerLink="/home/dashboard/folha" >Ver Folha de Pagamento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <!-- Cadastrar ENTRADA -->
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Entrada</h5>
+          <p class="card-text">Realize a confirmação do horário de entrada na empresa. <br>(Utiliza data e hora atual para cadastro)</p>
+          <button type="submit" (click)="entrada()" class="btn btn-primary">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+    <!-- Cadastrar SAÍDA -->
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Saida</h5>
+          <p class="card-text">Realize a confirmação do horário de saída na empresa. <br>(Utiliza data e hora atual para cadastro)</p>
+          <button type="submit" (click)="saida()" class="btn btn-primary">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Faz a renderização de rotas informadas no componente-->
+<router-outlet></router-outlet>

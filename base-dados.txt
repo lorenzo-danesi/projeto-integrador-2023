@@ -2,16 +2,65 @@ CREATE DATABASE projeto-integrador
 CREATE TABLE departamento(id_departamento SERIAL PRIMARY KEY, nome_departamento VARCHAR(40), descricao VARCHAR(100));
 INSERT INTO departamento(nome_departamento, descricao) 
 	VALUES ('Gerência', 'Controle e planejamento de operações da empresa.');
+INSERT INTO departamento(nome_departamento, descricao) 
+	VALUES ('Financeiro', 'Administração dos recursos financeiros da empresa e organização de gastos.');
+INSERT INTO departamento(nome_departamento, descricao) 
+	VALUES ('R. Humanos', 'Ações relacionadas junto à colaboradores.');
+INSERT INTO departamento(nome_departamento, descricao) 
+	VALUES ('Administrativo', 'Definição e organização de objetivos.');
 
 CREATE TABLE cargo(id_cargo SERIAL PRIMARY KEY, nome_cargo VARCHAR(100), salario NUMERIC, vale_alimentacao NUMERIC, vale_transporte NUMERIC, carga_horaria INT);
 INSERT INTO cargo(nome_cargo, salario, vale_alimentacao, vale_transporte, carga_horaria) 
 	VALUES ('G. Administrativo', 4163.05, 534.41, 213.80, 44);
+INSERT INTO cargo(nome_cargo, salario, vale_alimentacao, vale_transporte, carga_horaria) 
+	VALUES ('Anal. Financeiro', 4599.95, 450.99, 205.90, 45);
+INSERT INTO cargo(nome_cargo, salario, vale_alimentacao, vale_transporte, carga_horaria) 
+	VALUES ('G. de Pessoal', 2312.50, 299.05, 207.10, 40);
+INSERT INTO cargo(nome_cargo, salario, vale_alimentacao, vale_transporte, carga_horaria) 
+	VALUES ('Aux. Administrativo', 3101.45, 350.05, 0.0, 40);
 
 CREATE TABLE funcionario(id_funcionario SERIAL PRIMARY KEY, id_cargo INT, id_departamento INT,
 						 permissao VARCHAR(12), nome_funcionario VARCHAR(50), cpf VARCHAR(15), email VARCHAR (60), senha VARCHAR(8),
 						 telefone VARCHAR(15), data_cadastro DATE, status VARCHAR(50),
-							FOREIGN KEY (id_departamento) REFERENCES departamento(id_departamento) ON DELETE SET NULL
-						 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo) ON DELETE SET NULL);
+							FOREIGN KEY (id_departamento) REFERENCES departamento(id_departamento)
+							ON UPDATE CASCADE 
+							ON DELETE SET NULL,
+						 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo) 
+							ON UPDATE CASCADE 
+							ON DELETE SET NULL);
 							
 INSERT INTO funcionario(id_cargo, id_departamento, permissao, nome_funcionario, cpf, email, senha, telefone, data_cadastro, status)
 	VALUES(1, 1, 'Admin', 'Bob', '999.999.999-99', 'bob@domain.com', '1234', '(99)99999-9999', CURRENT_DATE, 'Ativo');
+INSERT INTO funcionario(id_cargo, id_departamento, permissao, nome_funcionario, cpf, email, senha, telefone, data_cadastro, status)
+	VALUES(2, 2, 'Funcionário', 'Joe', '999.999.999-00', 'joe@domain.com', '1234', '(55)90000-0000', CURRENT_DATE, 'Férias');
+INSERT INTO funcionario(id_cargo, id_departamento, permissao, nome_funcionario, cpf, email, senha, telefone, data_cadastro, status)
+	VALUES(3, 3, 'Funcionário', 'Michael', '000.000.000-00', 'mic@domain.com', '1234', '(00)00000-0000', CURRENT_DATE, 'Inativo');
+INSERT INTO funcionario(id_cargo, id_departamento, permissao, nome_funcionario, cpf, email, senha, telefone, data_cadastro, status)
+	VALUES(4, 4, 'Funcionário', 'Sarah', '000.999.000-99', 'sarah@domain.com', '1234', '(55)90000-9999', CURRENT_DATE, 'Ativo');
+
+CREATE TABLE ponto(id_ponto SERIAL PRIMARY KEY, id_funcionario INT, data DATE, horario_entrada TIME, horario_saida TIME,
+				  FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario));
+
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (1, '2023-07-03', '09:00:00', '18:00:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (1, '2023-07-07', '08:00:00', '17:00:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (1, '2023-07-04', '08:00:00', '17:00:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (1, '2023-07-05', '08:40:00', '17:40:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (1, '2023-07-06', '08:30:00', '17:30:00');
+
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (2, '2023-06-26', '09:00:00', '18:00:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (2, '2023-06-27', '08:30:00', '17:30:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (2, '2023-06-28', '08:40:00', '17:40:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (2, '2023-06-29', '08:30:00', '17:30:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (2, '2023-06-30', '08:00:00', '17:00:00');
+
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (3, '2023-06-26', '09:00:00', '18:00:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (3, '2023-06-27', '08:30:00', '17:30:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (3, '2023-06-28', '08:40:00', '17:40:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (3, '2023-06-29', '08:30:00', '17:30:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (3, '2023-06-30', '08:00:00', '17:00:00');
+
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (4, '2023-07-03', '09:00:00', '17:00:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (4, '2023-07-04', '09:30:00', '17:30:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (4, '2023-07-05', '09:05:00', '17:10:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (4, '2023-07-06', '09:00:00', '17:00:00');
+INSERT INTO ponto(id_funcionario, data, horario_entrada, horario_saida) VALUES (4, '2023-07-07', '08:00:00', '16:00:00');

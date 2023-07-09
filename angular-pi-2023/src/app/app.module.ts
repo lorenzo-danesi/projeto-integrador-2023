@@ -9,6 +9,9 @@ import { LoginModule } from './login/login/login.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandlerService } from './security/error-handler.service';
 import { JwtinterceptorService } from './security/jwtinterceptor.service';
+import { FolhaComponent } from './home/dashboard/folha/folha.component';
+
+
 
 @NgModule({
   declarations: [

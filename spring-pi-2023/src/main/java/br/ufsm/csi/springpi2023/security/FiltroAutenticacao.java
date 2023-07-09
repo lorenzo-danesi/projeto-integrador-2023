@@ -24,7 +24,7 @@ public class FiltroAutenticacao extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String url = request.getRequestURI();
-        System.out.println("filtro requisicao: "+url);
+        System.out.println("Filtro requisição: "+url);
 
         try{
 
@@ -33,7 +33,7 @@ public class FiltroAutenticacao extends OncePerRequestFilter {
                 String token = request.getHeader("Authorization");
                 System.out.println("Token: "+token);
                 String username = new JWTUtil().getUsernameToken(token);
-                System.out.println("username: "+username);
+                System.out.println("Username: "+username);
                 System.out.println("Token expirado? "+ new JWTUtil().isTokenExpirado(token));
 
                 if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
@@ -53,7 +53,7 @@ public class FiltroAutenticacao extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
 
         }catch (ExpiredJwtException e){
-            System.out.println("caiu no AccessDaniedException");
+            System.out.println("Caiu no AccessDaniedException");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token Expirado");
         }
     }

@@ -1,5 +1,6 @@
 package br.ufsm.csi.springpi2023.controller;
 
+import br.ufsm.csi.springpi2023.dao.FuncionarioDao;
 import br.ufsm.csi.springpi2023.model.Funcionario;
 import br.ufsm.csi.springpi2023.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<Object> autenticacao(@RequestBody Funcionario funcionario){
 
-        System.out.println("login: "+funcionario.getEmail());
-        System.out.println("senha: "+funcionario.getSenha());
+        System.out.println("Endereço de e-mail: "+funcionario.getEmail());
+        System.out.println("Senha original: "+funcionario.getSenha());
         try{
                 final Authentication authentication = this.authenticationManager
                         .authenticate(new UsernamePasswordAuthenticationToken(funcionario.getEmail(), funcionario.getSenha()));
@@ -34,13 +35,15 @@ public class LoginController {
                     //colocamos nossa instancia autenticada no contexto do spring security
                     SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                    System.out.println("Gerando token de autorizacao ****");
+                    //funcionario.setPermissao(authentication.getAuthorities().toString().replace("[", "").replace("]", ""));
+                    Funcionario user = new FuncionarioDao().getFuncionario(funcionario.getEmail());
+                    System.out.println("Gerando token de autorização ****");
                     String token = new JWTUtil().geraToken(funcionario);
 
-                    funcionario.setToken(token);
+                    user.setToken(token);
                     funcionario.setSenha("");
 
-                    return new ResponseEntity<>(funcionario, HttpStatus.OK);
+                    return new ResponseEntity<>(user, HttpStatus.OK);
                 }
 
         }catch (Exception e){
